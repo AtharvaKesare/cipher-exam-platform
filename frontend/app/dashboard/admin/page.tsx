@@ -59,9 +59,9 @@ export default function AdminDashboard() {
         if (!token) return router.push('/login');
 
         const [stRes, usRes, exRes] = await Promise.all([
-           fetch('http://localhost:5000/api/admin/stats', { headers: { 'Authorization': `Bearer ${token}` } }),
-           fetch('http://localhost:5000/api/admin/users', { headers: { 'Authorization': `Bearer ${token}` } }),
-           fetch('http://localhost:5000/api/admin/exams', { headers: { 'Authorization': `Bearer ${token}` } })
+           fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/stats`, { headers: { 'Authorization': `Bearer ${token}` } }),
+           fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/users`, { headers: { 'Authorization': `Bearer ${token}` } }),
+           fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/exams`, { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
 
         if (stRes.ok) setStats(await stRes.json());
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
   const handleRoleChange = async (userId: string, newRole: string, currentSubject?: string) => {
      try {
        const token = localStorage.getItem('token');
-       const res = await fetch(`http://localhost:5000/api/admin/users/${userId}/role`, {
+       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/users/${userId}/role`, {
          method: 'PUT',
          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
          body: JSON.stringify({ role: newRole, subjectSpecialty: currentSubject })
@@ -104,7 +104,7 @@ export default function AdminDashboard() {
   const handleSubjectChange = async (userId: string, newSubject: string, currentRole: string) => {
      try {
        const token = localStorage.getItem('token');
-       const res = await fetch(`http://localhost:5000/api/admin/users/${userId}/role`, {
+       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/users/${userId}/role`, {
          method: 'PUT',
          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
          body: JSON.stringify({ role: currentRole, subjectSpecialty: newSubject })
@@ -121,7 +121,7 @@ export default function AdminDashboard() {
      if (!confirm("Are you sure you want to completely delete this user?")) return;
      try {
        const token = localStorage.getItem('token');
-       const res = await fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/users/${userId}`, {
          method: 'DELETE',
          headers: { 'Authorization': `Bearer ${token}` }
        });
@@ -138,7 +138,7 @@ export default function AdminDashboard() {
      if (!confirm("Are you sure you want to completely delete this exam and all its records?")) return;
      try {
        const token = localStorage.getItem('token');
-       const res = await fetch(`http://localhost:5000/api/admin/exams/${examId}`, {
+       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/exams/${examId}`, {
          method: 'DELETE',
          headers: { 'Authorization': `Bearer ${token}` }
        });

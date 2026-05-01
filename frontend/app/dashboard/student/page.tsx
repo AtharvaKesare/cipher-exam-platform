@@ -17,7 +17,7 @@ export default function StudentDashboard() {
       const token = localStorage.getItem('token');
       if (!token) return router.push('/login');
       
-      const res = await fetch(`http://localhost:5000/api/dashboard/student`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/dashboard/student`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -52,7 +52,7 @@ export default function StudentDashboard() {
     setIsJoining(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/exams/join', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/join`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

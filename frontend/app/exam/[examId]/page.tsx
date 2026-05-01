@@ -257,7 +257,7 @@ export default function ExamEnvironment() {
     const initExam = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:5000/api/student/exam/${params.examId}/start`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/student/exam/${params.examId}/start`, {
            method: 'POST',
            headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -297,7 +297,7 @@ export default function ExamEnvironment() {
     initExam();
 
     // 1. Socket Connection
-    socketRef.current = io('http://localhost:5000');
+    socketRef.current = io(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}`);
     if (localStorage.getItem('user')) {
        const userStr = localStorage.getItem('user');
        const user = userStr ? JSON.parse(userStr) : {};
@@ -566,7 +566,7 @@ export default function ExamEnvironment() {
 
       let req: Response;
       try {
-        req = await fetch('http://localhost:5000/api/code/run', {
+        req = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/code/run`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -640,7 +640,7 @@ export default function ExamEnvironment() {
   const autoSubmitExam = async () => {
     try {
       const token = localStorage.getItem('token');
-      await fetch(`http://localhost:5000/api/student/exam/${params.examId}/submit`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/student/exam/${params.examId}/submit`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -684,7 +684,7 @@ export default function ExamEnvironment() {
       (async () => {
         try {
           const token = localStorage.getItem('token');
-          await fetch(`http://localhost:5000/api/student/exam/${params.examId}/submit`, {
+          await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/student/exam/${params.examId}/submit`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${token}`,

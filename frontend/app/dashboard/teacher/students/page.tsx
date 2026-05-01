@@ -31,7 +31,7 @@ function LogsModal({
     const fetchLogs = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:5000/api/dashboard/students/${student.id}/logs`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/dashboard/students/${student.id}/logs`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
@@ -161,7 +161,7 @@ export default function StudentsManagement() {
       try {
         const token = localStorage.getItem('token');
         if (!token) return;
-        const res = await fetch('http://localhost:5000/api/dashboard/students', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/dashboard/students`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {

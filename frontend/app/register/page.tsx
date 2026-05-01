@@ -163,7 +163,7 @@ export default function RegisterPage() {
       return;
     }
     try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -176,7 +176,7 @@ export default function RegisterPage() {
       localStorage.setItem('user', JSON.stringify(data));
       
       if (formData.inviteCode) {
-         const upgradeRes = await fetch('http://localhost:5000/api/auth/upgrade-to-teacher', {
+         const upgradeRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/upgrade-to-teacher`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${data.token}` },
             body: JSON.stringify({ inviteCode: formData.inviteCode, subjectSpecialty: formData.subjectSpecialty })

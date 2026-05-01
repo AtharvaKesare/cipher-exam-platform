@@ -42,7 +42,7 @@ export default function CreateExamPage() {
         throw new Error('Not logged in. Please log in as a teacher.');
       }
 
-      const res = await fetch('http://localhost:5000/api/exams', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

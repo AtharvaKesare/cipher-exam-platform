@@ -160,7 +160,7 @@ export default function ManageExamPage() {
         return;
       }
 
-      const res = await fetch(`http://localhost:5000/api/exams/${examId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -170,7 +170,7 @@ export default function ManageExamPage() {
       setExam(data);
 
       // Fetch enrolled students / analytics
-      const studentsRes = await fetch(`http://localhost:5000/api/exams/${examId}/students`, {
+      const studentsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}/students`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (studentsRes.ok) {
@@ -178,7 +178,7 @@ export default function ManageExamPage() {
       }
 
       // Fetch logs
-      const logsRes = await fetch(`http://localhost:5000/api/exams/${examId}/logs`, {
+      const logsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}/logs`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (logsRes.ok) {
@@ -199,7 +199,7 @@ export default function ManageExamPage() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/exams/${examId}/questions`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}/questions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -239,7 +239,7 @@ export default function ManageExamPage() {
     
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/exams/${examId}/session/${studentId}/reset`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}/session/${studentId}/reset`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -259,7 +259,7 @@ export default function ManageExamPage() {
     setIsReviewOpen(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/exams/${examId}/students/${studentId}/submissions`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}/students/${studentId}/submissions`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Failed to fetch submissions');
@@ -277,7 +277,7 @@ export default function ManageExamPage() {
   const handleSubmitScore = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/exams/${examId}/students/${reviewModalData.studentId}/score`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}/students/${reviewModalData.studentId}/score`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ score: Number(reviewScore) })
@@ -362,7 +362,7 @@ export default function ManageExamPage() {
                <button 
                  onClick={async () => {
                    const token = localStorage.getItem('token');
-                   const res = await fetch(`http://localhost:5000/api/exams/${examId}/generate-code`, {
+                   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}/generate-code`, {
                      method: 'POST', headers: { 'Authorization': `Bearer ${token}` }
                    });
                    if (res.ok) {

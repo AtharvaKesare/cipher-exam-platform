@@ -161,7 +161,7 @@ export default function LoginPage() {
       
       const faceEmbedding = Array.from(avgDescriptor);
       
-      const res = await fetch('http://localhost:5000/api/auth/login-face', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/login-face`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, faceEmbedding }),
@@ -197,7 +197,7 @@ export default function LoginPage() {
     setIsProcessing(true);
     
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

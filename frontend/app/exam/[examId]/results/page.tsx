@@ -22,7 +22,7 @@ export default function ExamResultsPage() {
            return;
         }
 
-        const res = await fetch(`http://localhost:5000/api/exams/${examId}/my-results`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}/my-results`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
 

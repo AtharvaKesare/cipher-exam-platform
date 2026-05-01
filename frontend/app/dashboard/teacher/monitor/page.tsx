@@ -95,7 +95,7 @@ function MonitorContent() {
       return;
     }
 
-    socketRef.current = io('http://localhost:5000', {
+    socketRef.current = io(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}`, {
       auth: { token }
     });
     
@@ -177,7 +177,7 @@ function MonitorContent() {
   const fetchActiveSessions = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/exams/${examId}/sessions`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${examId}/sessions`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       

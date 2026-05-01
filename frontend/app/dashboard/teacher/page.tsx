@@ -164,8 +164,8 @@ export default function TeacherDashboard() {
         }
 
         const [stRes, exRes] = await Promise.all([
-           fetch('http://localhost:5000/api/dashboard/teacher', { headers: { 'Authorization': `Bearer ${token}` } }),
-           fetch('http://localhost:5000/api/exams', { headers: { 'Authorization': `Bearer ${token}` } })
+           fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/dashboard/teacher`, { headers: { 'Authorization': `Bearer ${token}` } }),
+           fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams`, { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
 
         if (stRes.ok) {
@@ -197,7 +197,7 @@ export default function TeacherDashboard() {
     setIsExtending(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/exams/${extendModal.examId}/extend`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${extendModal.examId}/extend`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ additionalMinutes: minutes })
@@ -206,7 +206,7 @@ export default function TeacherDashboard() {
       if (res.ok) {
         setExtendModal({ open: false, examId: '', examTitle: '' });
         // Refresh data
-        const exRes = await fetch('http://localhost:5000/api/exams', { 
+        const exRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams`, { 
           headers: { 'Authorization': `Bearer ${token}` } 
         });
         if (exRes.ok) {
@@ -242,7 +242,7 @@ export default function TeacherDashboard() {
     setIsDeleting(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/api/exams/${deleteModal.examId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/exams/${deleteModal.examId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
