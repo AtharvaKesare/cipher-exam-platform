@@ -1,0 +1,18 @@
+{
+  "name": "proctor-execution-worker",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Docker execution worker for AI Proctored Coding Platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "bullmq": "^5.71.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}

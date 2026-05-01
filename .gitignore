@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+MONDODB ATLAS.txt
+err.txt
+test_out.txt
+test_results.txt
+test_results2.txt
+test_results3.txt
+tsc_output.txt
+report_text.txt
+debug.json
