@@ -12,6 +12,7 @@
   <img src="./docs/violation.png" width="45%" alt="Proctoring Violation Detection" />
   <img src="./docs/student_dashboard.png" width="45%" alt="Student Dashboard" />
   <img src="./docs/teacher_dashboard.png" width="45%" alt="Teacher Dashboard" />
+  <img src="./docs/admin_dashboard.png" width="90%" alt="Platform Administration" />
 </div>
 
 ## 🌟 Overview
